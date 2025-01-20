@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  History,
+  User,
   Plus,
   CheckSquare,
   Settings,
@@ -18,7 +18,7 @@ const UserDashboard = () => {
 const navItems = [
     { id: 'current-status', label: 'Current Status', icon: CheckSquare },
     { id: 'add-leave', label: 'Request Leave', icon: Plus },
-    // { id: 'history', label: 'Leave History', icon: History },
+    { id: 'manager-info', label: 'Manager Info', icon: User },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 

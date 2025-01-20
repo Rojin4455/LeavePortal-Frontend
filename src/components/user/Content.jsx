@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import CurrentStatus from './CurrentStatus'
 import AddLeaveRequest from './AddLeaveRequest';
+import ManagerInfo from './ManagerInfo';
 
 export default function Content({navItems}) {
     const contentName = useSelector((state) => state.userContent.contentName)
@@ -17,14 +18,13 @@ export default function Content({navItems}) {
         <p className="text-gray-500 mt-1">
           {contentName === 'current-status' && "Overview of your leave status and recent requests"}
           {contentName === 'add-leave' && "Submit a new leave request"}
-          {contentName === 'history' && "View your leave history"}
           {contentName === 'settings' && "Manage your account settings"}
         </p>
       </div>
 
       {contentName === 'current-status' && <CurrentStatus/>}
+      {contentName === 'manager-info' && <ManagerInfo/>}
       {contentName === 'add-leave' && <AddLeaveRequest/>}
-      {contentName === 'history' && <div>History Component</div>}
       {contentName === 'settings' && <div>Settings Component</div>}
     </div>
   </main>

@@ -2,11 +2,12 @@ import React,{useState} from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { clearContent } from '../../slices/managerContentSlice';
 import { clearUser } from '../../slices/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axios/axiosConfig';
 
 const Header = () => {
+    const {userName} = useSelector((state)=> state.user)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -41,7 +42,7 @@ const Header = () => {
     <header className="bg-gradient-to-r from-third to-secondary text-fifth py-4 px-6 flex justify-between items-center shadow-md">
       <h1 className="text-2xl font-bold">LeaveEase Manager Dashboard</h1>
       <div className="flex items-center gap-4">
-        <p className="text-sm">Welcome, <span className="font-semibold">Manager</span></p>
+        <p className="text-sm">Welcome, <span className="font-semibold">{userName}</span></p>
         <FaUserCircle className="text-3xl cursor-pointer hover:text-gray-200 transition duration-200" 
         onClick={openModal}
         />

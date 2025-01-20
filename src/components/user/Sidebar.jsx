@@ -36,7 +36,6 @@ export default function Sidebar({isMobileMenuOpen, navItems}) {
     }
   };
 
-    console.log("nanv itemsss: ", navItems)
   return (
     <>
     {isModalOpen && (

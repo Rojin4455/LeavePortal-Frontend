@@ -42,11 +42,28 @@ const Signup = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.first_name.trim()) newErrors.first_name = "First name is required.";
-    if (!formData.last_name.trim()) newErrors.last_name = "Last name is required.";
+    if (!formData.first_name.trim()) {
+      newErrors.first_name = "First name is required.";
+    } else if (formData.first_name.trim().length < 2) {
+      newErrors.first_name = "First name must be at least 2 characters.";
+    } else if (!/^[a-zA-Z]+$/.test(formData.first_name.trim())) {
+      newErrors.first_name = "First name can only contain letters.";
+    }
+    
+    if (!formData.last_name.trim()) {
+      newErrors.last_name = "Last name is required.";
+    }else if (!/^[a-zA-Z]+$/.test(formData.last_name.trim())) {
+      newErrors.last_name = "Last name can only contain letters.";
+    }
+    
+    // Validate email
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Valid email is required.";
+    } else if (/[*]/.test(formData.email)) {
+      newErrors.email = "Email cannot contain invalid characters like '*'.";
     }
+
+
     if (!formData.password || formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters.";
     }

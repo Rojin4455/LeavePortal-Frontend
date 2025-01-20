@@ -7,7 +7,7 @@ const SideBar = () => {
   const options = [
     { id: 'users', label: 'Team Members', icon: <FaUsers /> },
     { id: 'requests', label: 'Requests', icon: <FaAddressBook /> },
-    { id: 'reports', label: 'Reports', icon: <FaChartLine /> },
+    // { id: 'reports', label: 'Reports', icon: <FaChartLine /> },
     { id: 'settings', label: 'Settings', icon: <FaCog /> },
     
   ];

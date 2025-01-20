@@ -120,7 +120,13 @@ const AddLeaveRequest = () => {
         if (response.status === 201){
             console.log("Leave Request Added", response)
             toast.success('Leave Request is submitted!');
-            setLeaveTypes([])
+            setFormData({
+                leaveType: '',
+                startDate: '',
+                endDate: '',
+                numDays: 0,
+                reason: ''
+              })
 
 
         }else{

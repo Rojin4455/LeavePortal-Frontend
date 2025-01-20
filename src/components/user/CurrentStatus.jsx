@@ -63,51 +63,58 @@ export default function CurrentStatus() {
       <div className="p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Leave Requests</h3>
         <div className="space-y-4">
-  {leaveRequests.map((request, index) => (
-    <div
-      key={index}
-      className="flex flex-col p-4 bg-white rounded-lg shadow-md border border-gray-200"
-    >
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="text-lg font-semibold text-gray-800">
-            {new Date(request.start_date).toLocaleDateString()} - {new Date(request.end_date).toLocaleDateString()}
-          </p>
-          <p className="text-sm text-gray-600">
-            <strong>Days:</strong> {request.num_days}
-          </p>
-          <p className="text-sm text-gray-600">
-            <strong>Reason:</strong> {request.reason}
-          </p>
+  {leaveRequests.map((request, index) => {
+    // Determine if the leave request is expired
+    const isExpired = new Date() > new Date(request.start_date) && request.status === 'PENDING';
+
+    return (
+      <div
+        key={index}
+        className="flex flex-col p-4 bg-white rounded-lg shadow-md border border-gray-200"
+      >
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="text-lg font-semibold text-gray-800">
+              {new Date(request.start_date).toLocaleDateString()} - {new Date(request.end_date).toLocaleDateString()}
+            </p>
+            <p className="text-sm text-gray-600">
+              <strong>Days:</strong> {parseInt(request.num_days)}
+            </p>
+            <p className="text-sm text-gray-600">
+              <strong>Reason:</strong> {request.reason}
+            </p>
+          </div>
+          <span
+            className={`px-4 py-1 rounded-full text-sm font-semibold capitalize
+              ${isExpired
+                ? 'bg-gray-300 text-gray-800'
+                : request.status === 'PENDING'
+                ? 'bg-yellow-100 text-yellow-800'
+                : request.status === 'APPROVED'
+                ? 'bg-green-100 text-green-800'
+                : 'bg-red-100 text-red-800'
+              }`}
+          >
+            {isExpired ? 'expired' : request.status.toLowerCase()}
+          </span>
         </div>
-        <span
-          className={`px-4 py-1 rounded-full text-sm font-semibold capitalize
-            ${request.status === 'PENDING'
-              ? 'bg-yellow-100 text-yellow-800'
-              : request.status === 'APPROVED'
-              ? 'bg-green-100 text-green-800'
-              : 'bg-red-100 text-red-800'
-            }`}
-        >
-          {request.status.toLowerCase()}
-        </span>
-      </div>
-      <div className="mt-2 flex justify-between items-center text-sm text-gray-500">
-        <p>
-          <strong>Leave Type ID:</strong> {request.leave_type}
-        </p>
-        <p>
-          <strong>Requested On:</strong> {new Date(request.created_at).toLocaleDateString()}
-        </p>
-        {request.approved_by && (
+        <div className="mt-2 flex justify-between items-center text-sm text-gray-500">
           <p>
-            <strong>Approved By:</strong> {request.approved_by}
           </p>
-        )}
+          <p>
+            <strong>Requested On:</strong> {new Date(request.created_at).toLocaleDateString()}
+          </p>
+          {request.approved_by && (
+            <p>
+              <strong>Approved By:</strong> {request.approved_by}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
-  ))}
+    );
+  })}
 </div>
+
 
       </div>
     </div>

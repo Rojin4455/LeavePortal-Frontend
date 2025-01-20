@@ -9,6 +9,7 @@ import {
   ArrowLeft,
   CheckCircle,
   XCircle,
+  X,
   AlertCircle,
   History
 } from 'lucide-react';
@@ -118,6 +119,8 @@ useEffect(() => {
         return 'bg-green-100 text-green-800';
       case 'REJECTED':
         return 'bg-red-100 text-red-800';
+    case 'EXPIRED':
+        return 'bg-red-200 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -129,8 +132,10 @@ useEffect(() => {
         return <AlertCircle className="w-4 h-4" />;
       case 'APPROVED':
         return <CheckCircle className="w-4 h-4" />;
-      case 'REJECTED':
-        return <XCircle className="w-4 h-4" />;
+        case 'REJECTED':
+            return <XCircle className="w-4 h-4" />;
+    case 'EXPIRED':
+            return <X className="w-4 h-4" />;
       default:
         return null;
     }

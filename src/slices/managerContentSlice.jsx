@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    contentName: "Team Members"
+    contentName: "users"
 }
 
 const managerContent = createSlice({
@@ -12,7 +12,7 @@ const managerContent = createSlice({
             state.contentName = action.payload.contentName
         },
         clearContent : (state, action) => {
-            state.contentName = "Team Members"
+            state.contentName = "users"
         }
     }
 })
