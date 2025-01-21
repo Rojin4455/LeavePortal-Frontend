@@ -15,6 +15,8 @@ import { toast } from 'sonner';
 const AddLeaveRequest = () => {
   const [leaveTypes, setLeaveTypes] = useState([]);
 
+  
+
 
   useEffect(()=> {
     const fetchUserLeaveTypes = async () => {
@@ -133,6 +135,9 @@ const AddLeaveRequest = () => {
             console.error("error response : ", response)
         }
       }catch(error){
+        if (error.status === 400){
+            toast.error(error.response.data.errors.date_range)
+        }
         console.error("something went wrong: ", error)
       }
     }

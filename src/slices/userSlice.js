@@ -25,13 +25,19 @@ const userSlice = createSlice({
             state.userType = "anonymous"
             state.userName = null
 
-        }
+        },
+        updateAccessToken: (state, action) => {
+            state.accessToken = action.payload;
+            state.refreshToken = state.refreshToken;
+            state.userType = state.userType;
+            state.userName = state.userName;
+          }
     }
 })
 
 
 
 
-export const {setUser, clearUser} = userSlice.actions
+export const {setUser, clearUser, updateAccessToken} = userSlice.actions
 
 export default userSlice.reducer
